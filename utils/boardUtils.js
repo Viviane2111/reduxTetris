@@ -1,6 +1,6 @@
 //* Dimensions du plateau de jeu
 export const BOARD_WIDTH = 10; // Largeur de la grille en nombre de cellules x 4 x 16
-export const BOARD_HEIGHT = 16; // Hauteur de la grille en nombre de cellules
+export const BOARD_HEIGHT = 20; // Hauteur de la grille en nombre de cellules
 
 //* 1. Fonction pour créer un plateau de jeu vide
 export const createEmptyBoard = () => {

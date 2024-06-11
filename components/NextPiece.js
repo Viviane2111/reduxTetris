@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react"; //!
 import { useSelector } from "react-redux";
-import { renderNextPiece, } from "../utils/boardUtils";
+import {
+  renderNextPiece,
+  createEmptyBoard,
+  placePieceOnBoard,
+} from "../utils/boardUtils";
 
 const NextPiece = () => {
   const nextPiece = useSelector((state) => state.tetris.nextPiece);
 
+  const [pieceBoard, setPieceBoard] = useState([]); //!
+  useEffect(() => {
+    const emptyBoard = createEmptyBoard(4, 3); // Create an empty board of size 4x3
+    const boardWithPiece = placePieceOnBoard(emptyBoard, nextPiece, {
+      x: 1,
+      y: 1,
+    });
+    setPieceBoard(boardWithPiece);
+  }, [nextPiece]);
 
   return (
     <div className="next-piece flex flex-col items-center">

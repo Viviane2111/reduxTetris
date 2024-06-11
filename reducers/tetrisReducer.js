@@ -15,12 +15,25 @@ const initialState = {
   score: 0,
   level: 1,
   linesCleared: 0,
+  isGameRunning: false,
+  isGameOver: false,
 };
 
 const tetrisSlice = createSlice({
   name: "tetris",
   initialState,
   reducers: {
+    startGame: (state) => {
+      state.isGameRunning = true;
+      state.isGameOver = false;
+      state.board = createEmptyBoard();
+      state.piece = generateRandomPiece();
+      state.nextPiece = generateRandomPiece();
+      state.position = { x: 4, y: 0 };
+      state.score = 0;
+      state.level = 1;
+      state.linesCleared = 0;
+    },
     //* Placer les pièces sur le tableau
     placePiece: (state) => {
       const newBoard = placePieceOnBoard(
@@ -38,11 +51,9 @@ const tetrisSlice = createSlice({
         state.level += 1;
       }
 
-      //! Utiliser la pièce suivante et générer une nouvelle pièce
+      // Utiliser la pièce suivante et générer une nouvelle pièce
       state.piece = state.nextPiece;
       state.nextPiece = generateRandomPiece();
-      // state.piece = generateRandomPiece();
-      // state.piece = state.nextPiece;
       state.position = { x: 4, y: 0 };
 
       if (checkCollision(state.board, state.piece, state.position)) {
@@ -79,19 +90,22 @@ const tetrisSlice = createSlice({
         if (state.linesCleared >= state.level * 10) {
           state.level += 1;
         }
-        //! 5. On utilise la pièce suivante et on génère un nouvelle pièce 
+        // 5. On utilise la pièce suivante et on génère un nouvelle pièce 
         state.piece = state.nextPiece;
         state.nextPiece = generateRandomPiece();        
-        // state.piece = state.nextPiece;
-        // state.piece = generateRandomPiece();
         state.position = { x: 4, y: 0 };
         
+        // if (checkCollision(state.board, state.piece, state.position)) {
+        //   state.board = createEmptyBoard();
+        //   state.score = 0;
+        //   state.level = 1;
+        //   state.linesCleared = 0;
+        //   alert("Game Over");
+        // }
+        //! utilisation de la modale
         if (checkCollision(state.board, state.piece, state.position)) {
-          state.board = createEmptyBoard();
-          state.score = 0;
-          state.level = 1;
-          state.linesCleared = 0;
-          alert("Game Over");
+          state.isGameOver = true;
+          state.isGameRunning = false;
         }
       }
     },
@@ -125,6 +139,23 @@ const tetrisSlice = createSlice({
       }
     },
 
+    resetGame: (state) => {
+      state.isGameRunning = false;
+      state.isGameOver = false;
+      state.board = createEmptyBoard();
+      state.piece = generateRandomPiece();
+      state.nextPiece = generateRandomPiece();
+      state.position = { x: 4, y: 0 };
+      state.score = 0;
+      state.level = 1;
+      state.linesCleared = 0;
+    },
+
+    endGame: (state) => {
+      state.isGameOver = true;
+      state.isGameRunning = false;
+    },
+
     //* Mise à jour du score
     updateScore: (state, action) => {
       // 1. On récupère le nombre de lignes effacées à partir de l'état actuel.
@@ -149,10 +180,13 @@ const tetrisSlice = createSlice({
 });
 
 export const {
+  startGame,
   placePiece,
   movePiece,
   movePieceDown,
   rotatePiece,
+  resetGame,
+  endGame,
   updateScore,
 } = tetrisSlice.actions;
 export default tetrisSlice;

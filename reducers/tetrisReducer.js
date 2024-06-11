@@ -23,6 +23,8 @@ const tetrisSlice = createSlice({
   name: "tetris",
   initialState,
   reducers: {
+
+    //* Action pour démarrer le jeu
     startGame: (state) => {
       state.isGameRunning = true;
       state.isGameOver = false;
@@ -34,6 +36,7 @@ const tetrisSlice = createSlice({
       state.level = 1;
       state.linesCleared = 0;
     },
+
     //* Placer les pièces sur le tableau
     placePiece: (state) => {
       const newBoard = placePieceOnBoard(
@@ -94,15 +97,8 @@ const tetrisSlice = createSlice({
         state.piece = state.nextPiece;
         state.nextPiece = generateRandomPiece();        
         state.position = { x: 4, y: 0 };
-        
-        // if (checkCollision(state.board, state.piece, state.position)) {
-        //   state.board = createEmptyBoard();
-        //   state.score = 0;
-        //   state.level = 1;
-        //   state.linesCleared = 0;
-        //   alert("Game Over");
-        // }
-        //! utilisation de la modale
+
+        // appel de la modale => isGAmeOver = true
         if (checkCollision(state.board, state.piece, state.position)) {
           state.isGameOver = true;
           state.isGameRunning = false;
@@ -139,6 +135,7 @@ const tetrisSlice = createSlice({
       }
     },
 
+    //* Action pour réinitialiser le jeu
     resetGame: (state) => {
       state.isGameRunning = false;
       state.isGameOver = false;
@@ -151,6 +148,7 @@ const tetrisSlice = createSlice({
       state.linesCleared = 0;
     },
 
+    //* Action pour marquer la fin du jeu
     endGame: (state) => {
       state.isGameOver = true;
       state.isGameRunning = false;

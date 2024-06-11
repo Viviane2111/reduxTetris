@@ -30,10 +30,13 @@ const NextPiece = () => {
               <div
                 key={cellIndex}
                 className={`w-4 h-4 border ${
-                  cell.value ? "border-gray-800 rounded-sm" : "border-gray-800"
+                  // cell.value ? "border-gray-800 rounded-sm" : "border-gray-800"
+                  cell.value
+                    ? "border-[#020617] rounded-sm"
+                    : "border-[#020617]"
                 }`}
                 style={{
-                  backgroundColor: cell.value ? cell.color : "#1F2937",
+                  backgroundColor: cell.value ? cell.color : "#020617",
                 }}
               />
             ))}

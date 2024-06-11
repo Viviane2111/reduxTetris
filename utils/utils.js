@@ -1,5 +1,9 @@
 
-//* Fonction pour générer une nouvelle pièce aléatoire
+/** CRÉATION DES PIÈCES DU JEU **/
+/* 
+ * Modèle des différentes pièces
+ * Fonction pour générer une nouvelle pièce aléatoire 
+*/
 export function generateRandomPiece() {
   const pieces = [
     { shape: [[1]], color: "#e000e0",},

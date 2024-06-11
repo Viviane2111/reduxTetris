@@ -108,7 +108,7 @@ const GameBoard = () => {
           <div className="flex flex-col justify-center gap-5 my-1 mx-2">
             <div className="text-white mt-2 pl-2 text-sm flex flex-col items-center">
               <p>Best score:</p>
-              <p>9999</p>
+              <p>10 000</p>
             </div>
             <div className="text-white mt-2 mx-auto text-sm">
               Score: {score}

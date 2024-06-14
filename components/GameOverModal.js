@@ -20,13 +20,13 @@ const GameOverModal = () => {
         <h2 className="text-2xl mb-4">Game Over</h2>
         <div className="flex justify-around">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-slate-500 text-white px-4 py-2 rounded"
             onClick={handleRestart}
           >
             Rejouer
           </button>
           <button
-            className="bg-red-500 text-white px-4 py-2 rounded"
+            className="bg-orange-500 text-white px-4 py-2 rounded"
             onClick={handleQuit}
           >
             Quitter

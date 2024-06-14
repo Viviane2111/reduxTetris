@@ -10,6 +10,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Head>
+        <link rel="icon" href="./tetrisbtn.png" sizes="12x12" type="image/png" />
         <title>Next Tetris</title>
         <meta
           name="description"
